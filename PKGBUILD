@@ -45,8 +45,8 @@ package() {
   install \
     -dm755 \
     "${_dest}"
-  install \
-    -Dm644 \
+  cp
+    -r \
     "${_files[@]}" \
     "${_dest}"
 }
