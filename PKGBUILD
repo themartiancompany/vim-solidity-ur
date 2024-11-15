@@ -41,7 +41,7 @@ package() {
   )
   _dest="${pkgdir}/usr/share/vim/vimfiles"
   cd \
-    "${pkgname} "
+    "${pkgname}"
   install \
     -dm755 \
     "${_dest}"
