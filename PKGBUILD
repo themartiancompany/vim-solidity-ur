@@ -1,23 +1,52 @@
-# Maintainer: Pellegrino Prevete <pellegrinoprevete@gmail.com>
+# SPDX-License-Identifier: AGPL-3.0
+#
+# Maintainer: Truocolo <truocolo@aol.com>
+# Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
 
-pkgname=vim-solidity
+_proj="vim"
+_pkg="solidity"
+pkgname="${_proj}-${_pkg}"
 pkgver=1.0
 pkgrel=1
 pkgdesc="Vim syntax file for Solidity."
-arch=('any')
-url="https://github.com/tomlion/vim-solidity"
+arch=(
+  'any'
+)
+_http="https://github.com"
+_ns="tomlion"
+url="${_http}/${_ns}/${pkgname}"
 commit="569bbbedc3898236d5912fed0caf114936112ae4"
-depends=('vim')
-license=("MIT")
-source=("${pkgname}::git+${url}#commit=${commit}")
-sha256sums=("SKIP")
+depends=(
+  "${_proj}"
+)
+license=(
+  "MIT"
+)
+source=(
+  "${pkgname}::git+${url}#commit=${commit}"
+)
+sha256sums=(
+  "SKIP"
+)
 
 package() {
-  cd ${pkgname} 
-  DEST=${pkgdir}/usr/share/vim/vimfiles
-  mkdir -p "${DEST}"
-  cp -r ftdetect ${DEST}
-  cp -r ftplugin ${DEST}
-  cp -r indent ${DEST}
-  cp -r syntax ${DEST}
+  local \
+    _dest \
+    _files=()
+  _files=(
+    ftdetect
+    ftplugin
+    indent
+    syntax
+  )
+  _dest="${pkgdir}/usr/share/vim/vimfiles"
+  cd \
+    "${pkgname} "
+  install \
+    -dm755 \
+    "${_dest}"
+  install \
+    -Dm644 \
+    "${_files[@]}" \
+    "${_dest}"
 }
